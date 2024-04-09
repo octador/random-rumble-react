@@ -4,10 +4,7 @@ import { useSelector } from 'react-redux';
 
 const Monster = () => {
   const monster = useSelector((store) => store.fight.monster
-   
   );
-// console.log();
-
   return  (
      <section>
         <div className="container">

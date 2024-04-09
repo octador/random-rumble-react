@@ -1,10 +1,11 @@
 import React from 'react';
 
 
+
 const ProgressBar =({pv,pvMax,bgType,faType,barName})=>(
     
             <div className="progress md-progress" >
-                <div className="progress-bar"
+                <div className="progress-bar progressstyle" 
                     style={{ width: (pv * 100 / pvMax) + "%" }}
                     aria-valuenow={pv}
                     aria-valuemin="0"

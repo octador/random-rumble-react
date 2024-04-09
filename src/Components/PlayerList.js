@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux';
 const PlayerList = () => {
   
     const players = useSelector((store) => store.fight.players);
-    // console.log(players);
-  
+    
   return (
   <div>
     {players.map(player => (
