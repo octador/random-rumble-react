@@ -1,12 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { hitMonster, hitPlayer, numberAlive } from '../feactures/fight/fightSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { hitMonster, hitPlayer, numberAlive, respawnPlayer, roundbyround } from '../feactures/fight/fightSlice';
 
 
 
 // mettre la class en fonction soit tu le récupère en props
 const ButtonCapacity = ({ player }) => {
     // créer une constante qui stock le hook dispatch de redux
+    const gameOver = useSelector((store) => store.fight.game);
     const dispatch = useDispatch();
 
     const hitStandard = (event) => {
@@ -22,22 +23,25 @@ const ButtonCapacity = ({ player }) => {
             dammage: Math.floor(Math.random() * (40 - 10 + 1) + 10),
             playerId: player.id
         }));
-        dispatch(numberAlive())
 
+        dispatch(numberAlive());
+        dispatch(roundbyround({
+            playerId :player.id
+          }))
     }
-    // console.log(player.alive);
+
+    if (gameOver.over === true) {
+        alert('parti perdu, on recommence');
+        dispatch(respawnPlayer());
+    }
 
     return (
-        
-        <button disabled={player.alive ? false : true}id={player.id} type="button" onClick={hitStandard} className="btn btn-success material-tooltip-main ">
+        <button disabled={player.alive && player.manaChouk && player.played  ? false : true} id={player.id} type="button" onClick={hitStandard} className="btn btn-success material-tooltip-main ">
             Hit Standard
             <i className="fas fa-bomb"></i>
             <i className="fas fa-fire-alt"></i>
-        </button> 
-
+        </button>
     )
-
-
 }
 
 

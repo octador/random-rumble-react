@@ -2,6 +2,7 @@ import React from 'react';
 import ButtonCapacity from './ButtonCapacity';
 import ProgressBar from './ProgressBar';
 import ButtonCriticalStrike from './ButtonCriticalStrike';
+import ButtonMana from './buttonMana'
 
 
 
@@ -26,6 +27,7 @@ const PlayerCard = ({ player }) => {
                     <div >
                         <ButtonCapacity player={player} />
                         <ButtonCriticalStrike player={player}/>
+                        <ButtonMana player={player}/>
                     </div>
                 </div >
             </div >

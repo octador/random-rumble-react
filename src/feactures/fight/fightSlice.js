@@ -1,13 +1,13 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import { useEffect } from "react";
+
 
 const initialState = {
   players: [
-    { name: "John", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1, alive: true, manaChouk: true },
-    { name: "Jack", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, alive: true, manaChouk: true },
-    { name: "Jessy", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, alive: true, manaChouk: true },
-    { name: "Jenny", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4, alive: true, manaChouk: true }
+    { name: "John", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1, alive: true, manaChouk: true, played: true },
+    { name: "Jack", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, alive: true, manaChouk: true, played: true },
+    { name: "Jessy", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, alive: true, manaChouk: true, played: true },
+    { name: "Jenny", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4, alive: true, manaChouk: true, played: true }
   ],
 
   monster: {
@@ -17,6 +17,11 @@ const initialState = {
     faType: 'fa-heart',
     barName: ' : pv'
   },
+
+  game: {
+    over: false,
+    victory: false,
+  }
 };
 
 
@@ -27,22 +32,33 @@ export const fightSlice = createSlice({
     hitMonster: (state, action) => {
       state.monster.pv -= action.payload.hitValue
 
-      // check pv du monstre >0 combat gagner
       if (state.monster.pv <= 0) {
+        state.game.victory = true;
+        state.monster.pv = 0;
         alert('monster is dead');
-        state.monster.pv = 0
-
-        // cree une animation de dead pour le monster
+        state.monster.pv = 800
+        // state.game.over = false;
+        state.players.map((player) => {
+          player.pv = 100;
+          player.alive = true;
+          player.mana = 30;
+          player.played = true;
+        });
       }
     },
 
     hitPlayer: (state, action) => {
       const currentPlayer = state.players.find((player) => player.id === action.payload.playerId)
-      // console.log(currentPlayer);
+      
+    if (state.monster.pv > 0 && state.game.victory === false) {
       currentPlayer.pv -= action.payload.dammage
+    }
+      
 
-      if (currentPlayer.mana > 0) {
-        currentPlayer.mana -= action.payload.manaValue
+      if (action.payload.manaValue) {
+        if (currentPlayer.mana > 0 && state.monster.pv > 0 && state.game.victory === false) {
+          currentPlayer.mana -= action.payload.manaValue
+        }
       }
 
       if (currentPlayer.mana <= 0) {
@@ -63,14 +79,60 @@ export const fightSlice = createSlice({
 
     numberAlive: (state) => {
       const currentPlayerAlive = state.players.filter((player) => player.alive === true)
-      console.log(currentPlayerAlive.length);
-    
+      if (currentPlayerAlive.length === 0) {
+        state.game.over = true;
+      }
     },
+
+    regeneMana: (state, action) => {
+      const currentPlayerRegeneMana = state.players.find((player) => player.id === action.payload.playerId);
+      
+        currentPlayerRegeneMana.mana += action.payload.regenePlayerMana;
+      
+      if(currentPlayerRegeneMana.mana >= 30) {
+        currentPlayerRegeneMana.mana = 30;
+        }
     
 
+    },
 
+    roundbyround: (state, action) => {
+
+      const currentPlayerRound = state.players.find((player) => player.id === action.payload.playerId);
+// to dooooooooooooooo si monstre est mort ne pas faire sa
+
+      // currentPlayerRound.played = false;
+      const currentAlivePlayer = state.players.filter((player) => player.alive === true)
+
+      const allPlayersPlayed = currentAlivePlayer.every(player => player.played === false);
+
+     
+      if (allPlayersPlayed) {
+        state.players.map((player) => {
+          player.played = true
+        })
+
+      }
+    },
+    respawnPlayer: (state) => {
+      state.game.over = false;
+      state.players.map((player) => {
+        player.pv = 100;
+        player.alive = true;
+        player.mana = 30;
+        player.played = true;
+        state.monster.pv =800;
+      });
+    },
+    checkMonsterAlive: (state) => {
+      state.game.victory = false;
+    }
   },
-});
 
-export const { hitMonster, hitPlayer, numberAlive } = fightSlice.actions;
+
+})
+
+
+export const { hitMonster, hitPlayer, numberAlive, alertIfGameOver, respawnPlayer, regeneMana, roundbyround, checkMonsterAlive } = fightSlice.actions;
 export default fightSlice.reducer;
+
