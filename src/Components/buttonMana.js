@@ -10,7 +10,7 @@ const Buttonmana = ({ player }) => {
     const ButtonMana = (event) => {
         dispatch(
             regeneMana({
-                regenePlayerMana: 100,
+                regenePlayerMana: Math.floor(Math.random() * (7 - 5 + 1) + 5),
                 playerId: player.id,
                 buttonClass: 3
             }))

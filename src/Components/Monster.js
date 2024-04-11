@@ -1,13 +1,14 @@
 import React from 'react';
 import ProgressBar from './ProgressBar';
 import { useSelector } from 'react-redux';
+import image from '../asset/image/monstre.png'
 
 const Monster = () => {
   const monster = useSelector((store) => store.fight.monster
   );
   return  (
-     <section>
-        <div className="container">
+     <section className='mt-5'>
+        <div className="container border pb-3 w-75 ">
           <div className="row">
             <div className="card-monstre col-sm-12">
               <div id="monsterCard">
@@ -15,7 +16,7 @@ const Monster = () => {
                   <div className="row">
                     <div className="col-sm-2 offset-sm-3">
                       <span className="badge badge-danger ml-2 " id="degatSpanMonster"></span>
-                      <img className="img-fluid" src="http://res.publicdomainfiles.com/pdf_view/67/13925387417373.png" alt='monster' />
+                      <img className="img-fluid  height" src={image} alt='monster' />
                     </div>
 
                     <div id="comboOnMonster" className="col-sm-6">

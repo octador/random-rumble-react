@@ -9,7 +9,7 @@ const PlayerList = () => {
     const players = useSelector((store) => store.fight.players);
     
   return (
-  <div>
+  <div className='d-flex flex-wrap gap-5'>
     {players.map(player => (
       <PlayerCard
         key={player.id}
