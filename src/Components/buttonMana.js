@@ -19,6 +19,7 @@ const Buttonmana = ({ player }) => {
             hitPlayer({  
             dammage: Math.floor(Math.random() * (7 - 5 + 1) + 5),
             playerId: player.id,
+              
         }));
 
         dispatch(numberAlive()); 
@@ -32,7 +33,7 @@ const Buttonmana = ({ player }) => {
         alert('parti perdu, on recommence');
         dispatch(respawnPlayer());
     }
-
+ 
     return (
         <button disabled={player.alive 
         && player.manaChouk 

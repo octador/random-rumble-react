@@ -22,9 +22,7 @@ const ButtonCriticalStrike = ({ player }) => {
       playerId: player.id
     }));
 
-    if(monster.pv > 0) {
-      dispatch(checkMonsterAlive());
-    }
+ 
 
   
 
@@ -34,7 +32,9 @@ const ButtonCriticalStrike = ({ player }) => {
 
     if (gameOver.over === true) {
       alert('parti perdu, on recommence');
-      dispatch(respawnPlayer());
+        dispatch(respawnPlayer());
+    } else {
+      dispatch(checkMonsterAlive());
     }
     
   }
