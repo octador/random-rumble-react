@@ -10,6 +10,7 @@ const PlayerCard = ({ player }) => {
     return (
         <div key={player.id} className="col-sm-3 card center" id={`joueur${player.id}`}>
             <div className="card-body text-center progressstyle">
+                <img src = {player.avatar} width="auto" height="auto"/>
                 <h5 className="card-title">{player.name}</h5>
                 <ProgressBar
                     pv={player.pv}

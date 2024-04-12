@@ -39,7 +39,7 @@ const ButtonCriticalStrike = ({ player }) => {
     
   }
   return (
-    <button disabled={player.alive && player.manaChouk && player.played  ? false : true} id={player.id} type="button" onClick={criticalStrike} className="btn btn-success material-tooltip-main ">
+    <button disabled={player.alive && player.manaChouk && player.played  ? false : true} id={player.id} type="button" onClick={criticalStrike} className=" btn btn-danger material-tooltip-main m-2">
       Hit Critick
       <i className="fas fa-bomb"></i>
       <i className="fas fa-fire-alt"></i>

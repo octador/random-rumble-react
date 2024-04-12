@@ -36,7 +36,7 @@ const ButtonCapacity = ({ player }) => {
     }
 
     return (
-        <button disabled={player.alive && player.manaChouk && player.played  ? false : true} id={player.id} type="button" onClick={hitStandard} className="btn btn-success material-tooltip-main ">
+        <button disabled={player.alive && player.manaChouk && player.played  ? false : true} id={player.id} type="button" onClick={hitStandard} className="btn btn-secondary material-tooltip-main ">
             Hit Standard
             <i className="fas fa-bomb"></i>
             <i className="fas fa-fire-alt"></i>

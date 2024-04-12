@@ -1,13 +1,17 @@
 
 import { createSlice } from "@reduxjs/toolkit";
+import player1 from '../../asset/image/diablo.png'
+import player2 from '../../asset/image/fanck.png'
+import player3 from '../../asset/image/gouzzi.png'
+import player4 from '../../asset/image/poupou.png'
 
 
 const initialState = {
   players: [
-    { name: "John", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1, alive: true, manaChouk: true, played: true },
-    { name: "Jack", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, alive: true, manaChouk: true, played: true },
-    { name: "Jessy", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, alive: true, manaChouk: true, played: true },
-    { name: "Jenny", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4, alive: true, manaChouk: true, played: true }
+    { name: "John", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1, alive: true, manaChouk: true, played: true ,avatar: player1},
+    { name: "Jack", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, alive: true, manaChouk: true, played: true ,avatar: player2},
+    { name: "Jessy", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, alive: true, manaChouk: true, played: true ,avatar: player3},
+    { name: "Jenny", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4, alive: true, manaChouk: true, played: true ,avatar: player4}
   ],
 
   monster: {
